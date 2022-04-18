@@ -1,54 +1,43 @@
-
-
-
 class Field():
-    def __init__(self):
-        pass
+    def __init__(self, value):
+        self.value = value
 
 
 class Name(Field): 
-    
-    def __init__(self, forename_):
-        self.forename = forename_
         
-    def return_name(self):
-        return self.forename
+    pass
         
-
 
 class Phone(Field):
-    def __init__(self, phone_):
-        self.phone = list()
-        self.phone.append(phone_)
+    
+    def __init__(self, phone):
+        self.value = list()
+        self.value.append(phone)
+        
+
+class Email(Field):
+    
+    pass
+    
+    
+class Record():
+    
+    def __init__(self, name, phone, email):
+        self.name = name
+        self.email = email
+        self.phone = phone
         
     def add_new_number(self, phone_):
-        self.phone.append(phone_)
+        self.phone.value.append(phone_)
         
         
     def delete_number(self, phone_):
-        self.phone.remove(phone_)
+        self.phone.value.remove(phone_)
         
     def change_number(self, phone_, phone_for_change):
-        self.phone[self.phone.index(phone_)] = phone_for_change
+        self.phone.value[self.phone.value.index(phone_)] = phone_for_change
         
-    def return_phone(self):
-        return self.phone
     
-class Email(Field):
-    def __init__(self, email_):
-        self.email = email_
-
-    
-    def return_email(self):
-        return self.email
-    
-    
-class Record(Name, Phone, Email):
-    
-    def __init__(self, Name, Phone, Email):
-        self.name = Name.forename
-        self.email = Email.email
-        self.phone = Phone.phone
     
     
         
@@ -62,9 +51,9 @@ class AddressBook(Record):
         self.email = list()
     
     def add_new_contact(self, contact):
-        self.name.append(contact.name)
-        self.phone.append(contact.phone)
-        self.email.append(contact.email)
+        self.name.append(contact.name.value)
+        self.phone.append(contact.phone.value)
+        self.email.append(contact.email.value)
     
     def return_names(self):
         return self.name
@@ -89,7 +78,7 @@ def new_contact():
     else:
         email = "None"
     _email = Email(email)
-    
+    key = Record(_name, _phone, _email)   
     
     while(1):
         print("Do you want to add another phone?(y/n)")
@@ -99,11 +88,10 @@ def new_contact():
         if ans == 'y':
             print("Enter Phone : ")
             phone = input()
-            _phone.add_new_number(phone)
+            key.add_new_number(phone)
         else:
             print("You entered uncorrect answer, try again.")
-            
-    key = Record(_name, _phone, _email)    
+         
     AddressFaceBook.add_new_contact(key)
     
 def show_all():
